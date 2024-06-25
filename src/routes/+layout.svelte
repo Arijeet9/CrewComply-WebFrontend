@@ -20,6 +20,12 @@
 	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
 	import { storePopup } from '@skeletonlabs/skeleton';
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
+
+	import Sidebar from "$lib/components/Sidebar.svelte"
+
 </script>
 
+<main class="flex w-screen h-screen">
+<Sidebar />
 <slot />
+</main>
