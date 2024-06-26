@@ -21,7 +21,7 @@
 	import { storePopup } from '@skeletonlabs/skeleton';
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
 
-	import Sidebar from "$lib/components/Sidebar.svelte"
+	import Sidebar from "$lib/components/sidebar/Sidebar.svelte"
 
 </script>
 
