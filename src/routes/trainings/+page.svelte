@@ -1,0 +1,34 @@
+<script lang="ts">
+	import Button from '$lib/components/ui/button/Button.svelte';
+	import Search from '$lib/components/ui/search/Search.svelte';
+	import Select from '$lib/components/ui/select/Select.svelte';
+	import Pagination from '$lib/components/ui/table/Pagination.svelte';
+	import Table from '$lib/components/ui/table/Table.svelte';
+	import { Icon } from 'svelte-icons-pack';
+	import { SlOptionsVertical } from 'svelte-icons-pack/sl';
+</script>
+
+<div class="p-2 w-full bg-[#FFFFFF] text-[#09090B]">
+	<div class="h-[14vh] my-2 font-semibold text-3xl">Training Programs</div>
+	<div class="flex flex-col gap-4">
+		<div class="flex items-center justify-between">
+			<div class="flex  gap-2">
+				<Search />
+				<Select label="Select Department" />
+				<Select label="Tags" />
+			</div>
+			<div class="flex  gap-2">
+				<Button text="+ Create New Training" />
+				<div class="p-2 flex items-center justify-center rounded-md border border-[#E6E7EB]">
+					<Icon src={SlOptionsVertical} />
+				</div>
+			</div>
+		</div>
+		<div class="">
+			<Table />
+		</div>
+		<div class="absolute bottom-0">
+			<!-- <Pagination /> -->
+		</div>
+	</div>
+</div>

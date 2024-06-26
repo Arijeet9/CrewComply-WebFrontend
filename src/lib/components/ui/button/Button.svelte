@@ -1,13 +1,14 @@
 <script lang="ts">
-
-    export let label:string='';
-
+    export let text: string;
+    export let iconSrc: string | undefined=undefined;
+    export let buttonClass: string = 'btn btn-filled-primary';
 </script>
 
-
-<button type="button" class="btn btn-filled-primary ">
+<button type="button" class={buttonClass}>
+    {#if iconSrc}
     <span>
-        <img src={`/icons/upload.svg`} alt="" class="">
+      <img src={iconSrc} alt="" class="w-5 h-5 object-contain">
     </span>
-    <span>{label}</span>
+    {/if}
+    <span>{text}</span>
 </button>

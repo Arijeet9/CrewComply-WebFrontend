@@ -1,6 +1,5 @@
 <script lang="ts">
-	import Navlink from "./Navlink.svelte";
-
+	import Navlink from './Navlink.svelte';
 
 	const navLinks = [
 		{ href: '/dashboard', icon: '/icons/dashboard.svg', label: 'Dashboard' },
@@ -27,7 +26,9 @@
 	}
 </script>
 
-<nav class="min-w-[300px] max-h-screen p-4 flex flex-col justify-between overflow-scroll bg-[#FFFFFF] text-[#09090B]">
+<nav
+	class="min-w-[300px] max-h-screen p-4 flex flex-col justify-between overflow-scroll bg-[#FFFFFF] text-[#09090B]"
+>
 	<div class="flex flex-col gap-8">
 		<div class="text-2xl">
 			<img src="/logos/crewcomply-logo.svg" alt="" class="object-contain" />
@@ -47,7 +48,7 @@
 						<div class="w-1 h-full bg-[#E2E8F0]" />
 						<div class="flex flex-col gap-1">
 							{#each organisationNavLinks as { href, icon, label }}
-								<Navlink {href} {icon} {label} isSubLink />
+								<Navlink {href} {icon} {label} isSubLink onClick={() => {}} />
 							{/each}
 						</div>
 					</div>
