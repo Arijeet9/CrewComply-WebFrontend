@@ -63,7 +63,17 @@
         { no: 7, trainings: 'Nitrogen', department: 'N', frequently: 14.007, tags:"Basics" },
         { no: 8, trainings: 'Oxygen', department: 'O', frequently: 15.999, tags:"Basics" },
         { no: 9, trainings: 'Fluorine', department: 'F', frequently: 18.998, tags:"Basics" },
-        { no: 10, trainings: 'Neon', department: 'Ne', frequently: 20.180, tags:"Basics" }
+        { no: 10, trainings: 'Neon', department: 'Ne', frequently: 20.180, tags:"Basics" },
+		{ no: 11, trainings: 'Carbon', department: 'C', frequently: 12.011, tags:"Basics" },
+        { no: 12, trainings: 'Nitrogen', department: 'N', frequently: 14.007, tags:"Basics" },
+        { no: 13, trainings: 'Oxygen', department: 'O', frequently: 15.999, tags:"Basics" },
+        { no: 14, trainings: 'Fluorine', department: 'F', frequently: 18.998, tags:"Basics" },
+        { no: 15, trainings: 'Neon', department: 'Ne', frequently: 20.180, tags:"Basics" },
+		{ no: 16, trainings: 'Carbon', department: 'C', frequently: 12.011, tags:"Basics" },
+        { no: 17, trainings: 'Nitrogen', department: 'N', frequently: 14.007, tags:"Basics" },
+        { no: 18, trainings: 'Oxygen', department: 'O', frequently: 15.999, tags:"Basics" },
+        { no: 19, trainings: 'Fluorine', department: 'F', frequently: 18.998, tags:"Basics" },
+        { no: 20, trainings: 'Neon', department: 'Ne', frequently: 20.180, tags:"Basics" }
     ];
 	//Import handler from SSD
 	import { DataHandler } from '@vincjo/datatables';
@@ -73,39 +83,38 @@
 	const rows = handler.getRows();
 </script>
 
-<div class=" overflow-x-auto space-y-4">
+<div class="h-[70vh] relative overflow-x-auto space-y-4 ">
 	<!-- Header -->
 	<header class="flex justify-between gap-4">
 
 	</header>
 	<!-- Table -->
-	<table class="table table-hover table-compact w-full table-auto variant-filled">
+	<table class="table  table-compact w-full table-auto ">
 		<thead>
-			<tr class="variant-filled">
+			<tr class="">
+				<th><input type="checkbox" /></th>
 				<ThSort {handler} orderBy="no">No</ThSort>
 				<ThSort {handler} orderBy="trainings">Trainings</ThSort>
 				<ThSort {handler} orderBy="department">Department</ThSort>
 				<ThSort {handler} orderBy="frequently">Frequently</ThSort>
 				<ThSort {handler} orderBy="tags">Tags</ThSort>
-
 			</tr>
-
 		</thead>
-		<tbody>
+		<tbody class="">
 			{#each $rows as row}
-				<tr>
+				<tr class="">
+					<td><input type="checkbox" class="" /></td>
 					<td>{row.no}</td>
 					<td>{row.trainings}</td>
 					<td>{row.department}</td>
 					<td>{row.frequently}</td>
-					<td>{row.tags}</td>
-
+					<td ><span>{row.tags}</span></td>
 				</tr>
 			{/each}
 		</tbody>
 	</table>
 	<!-- Footer -->
-	<footer class="flex justify-end">
+	<footer class="absolute bottom-0 left-2/4 translate-x-[-50%]">
 		<Pagination {handler} />
 	</footer>
 </div>

@@ -8,11 +8,11 @@
 	import { SlOptionsVertical } from 'svelte-icons-pack/sl';
 </script>
 
-<div class="p-2 w-full bg-[#FFFFFF] text-[#09090B]">
+<div class="p-2 w-full max-h-screen bg-[#FFFFFF] text-[#09090B]">
 	<div class="h-[14vh] my-2 font-semibold text-3xl">Training Programs</div>
-	<div class="flex flex-col gap-4">
-		<div class="flex items-center justify-between">
-			<div class="flex  gap-2">
+	<div class=" flex flex-col gap-4">
+		<div class="flex flex-col gap-4 lg:gap-0 lg:flex-row lg:items-center lg:justify-between">
+			<div class="flex flex-col md:flex-row  gap-2">
 				<Search />
 				<Select label="Select Department" />
 				<Select label="Tags" />

@@ -19,7 +19,7 @@
 
 	let organisationDropdown = false;
 
-	function toggleDropdown(label) {
+	function toggleDropdown(label:string) {
 		if (label === 'Organisation') {
 			organisationDropdown = !organisationDropdown;
 		}
