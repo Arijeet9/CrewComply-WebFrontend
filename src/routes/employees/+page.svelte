@@ -27,6 +27,19 @@
 		<div class="">
 			<Table data={employees} checkbox={false} serials={true} />
 		</div>
-
 	</div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
