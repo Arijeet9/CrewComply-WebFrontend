@@ -25,7 +25,7 @@
 
 </script>
 
-<main class="flex w-screen h-screen">
+<main class="flex max-w-screen max-h-screen w-screen h-screen ">
 <Sidebar />
 <slot />
 </main>
