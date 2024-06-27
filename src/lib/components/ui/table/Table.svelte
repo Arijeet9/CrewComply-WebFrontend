@@ -90,8 +90,8 @@
 	export let checkbox: boolean = false;
 	export let serials: boolean = false;
 
-	let editPopup=-1;
-	let rowHovered=-1;
+	let editPopup = -1;
+	let rowHovered = -1;
 
 	//Import handler from SSD
 	import { DataHandler } from '@vincjo/datatables';
@@ -99,13 +99,13 @@
 	//Init data handler - CLIENT
 	const handler = new DataHandler(data, { rowsPerPage: 5 });
 	const rows = handler.getRows();
-	console.log("Rows:",$rows)
+	console.log('Rows:', $rows);
 
 	//get column headers for table from data
 	const tableColumnHeaders = Object.keys(data[0]);
 	//get no of columns for table
 	const columnCount = tableColumnHeaders.length;
-	console.log("Column Count:",columnCount)
+	console.log('Column Count:', columnCount);
 
 	// let totalColumnCount = 0;
 	//to get the total column count for tables
@@ -120,8 +120,7 @@
 	// console.log("Total Column Count:",totalColumnCount)
 
 	//converts first letter of each words in a sentence into uppercase
-	
-	
+
 	function capitalizedWords(str: string) {
 		const words = str.split(' ');
 		const capitalizedWords = words.map(
@@ -130,10 +129,9 @@
 		return capitalizedWords.join(' ');
 	}
 
-	const handleEditPopup=(index:number)=>{
-		editPopup=index;
-	}
-
+	const handleEditPopup = (index: number) => {
+		editPopup = index;
+	};
 </script>
 
 <!-- <div class="relative h-[70vh]">
@@ -190,50 +188,101 @@
 	</div>
 </div> -->
 
-
 <div class="relative max-h-[70vh] h-[70vh] text-nowrap">
 	<div class="flex flex-col font-medium rounded-lg border border-[#E6E7EB] overflow-x-scroll">
-		<div
-			class={`  rounded-t-lg flex  text-[#6B7280] bg-[#F1F5F9]`}
-		>
+		<div class={`  rounded-t-lg flex  text-[#6B7280] bg-[#F1F5F9]`}>
 			{#if checkbox}
-				<div class="p-2 min-w-[4vw] sticky left-0 text-center bg-[#F1F5F9]"><input type="checkbox" /></div>
-			{/if}
-			{#if serials}
-				<div class={`p-2 min-w-[4vw] sticky ${checkbox?'left-[4vw]':'left-0'} text-center bg-[#F1F5F9]`}>No.</div>
+				<div class="p-2 min-w-[4vw] sticky left-0 text-center bg-[#F1F5F9]">
+					<input type="checkbox" />
+				</div>
 			{/if}
 
-			{#each tableColumnHeaders as column,i}
-				<div class={`p-2  ${i===0?`min-w-[14vw] sticky ${checkbox && serials?'left-[8vw]':((checkbox || serials)?'left-[4vw]':'left-0')} `:'min-w-[18vw]'} bg-[#F1F5F9]`}>{capitalizedWords(column)}</div>
+			{#if serials}
+				<div
+					class={`p-2 min-w-[4vw] sticky ${checkbox ? 'left-[4vw]' : 'left-0'} text-center bg-[#F1F5F9]`}
+				>
+					No.
+				</div>
+			{/if}
+			{#each tableColumnHeaders as column, i}
+				<div
+					class={`p-2  ${i === 0 ? `min-w-[14vw] sticky ${checkbox && serials ? 'left-[8vw]' : checkbox || serials ? 'left-[4vw]' : 'left-0'} ` : 'min-w-[18vw]'} bg-[#F1F5F9]`}
+				>
+					{capitalizedWords(column)}
+				</div>
 			{/each}
 		</div>
-		<div class="flex flex-col rounded-b-lg ">
+		<div class="flex flex-col rounded-b-lg">
 			{#each $rows as row, i}
-				<button on:mouseenter={()=>rowHovered=i} on:mouseleave={()=>rowHovered=-1}  class={`flex hover:bg-surface-100`}>
+				<button
+					on:mouseenter={() => (rowHovered = i)}
+					on:mouseleave={() => (rowHovered = -1)}
+					class={`flex hover:bg-surface-100`}
+				>
 					{#if checkbox}
-						<div class={`p-2 min-w-[4vw] sticky left-0 text-center ${rowHovered===i ? 'bg-surface-100':'bg-[#FFFFFF]'}`}><input type="checkbox" /></div>
+						<div
+							class={`p-2 min-w-[4vw] sticky left-0 text-center ${rowHovered === i ? 'bg-surface-100' : 'bg-[#FFFFFF]'}`}
+						>
+							<input type="checkbox" />
+						</div>
 					{/if}
 					{#if serials}
-						<div class={`p-2 min-w-[4vw] sticky ${checkbox?'left-[4vw]':'left-0'} text-center ${rowHovered===i? 'bg-surface-100':'bg-[#FFFFFF]'}`}>{i + 1}</div>
+						<div
+							class={`p-2 min-w-[4vw] sticky ${checkbox ? 'left-[4vw]' : 'left-0'} text-center ${rowHovered === i ? 'bg-surface-100' : 'bg-[#FFFFFF]'}`}
+						>
+							{i + 1}
+						</div>
 					{/if}
-					{#each tableColumnHeaders as name,index}
+					{#each tableColumnHeaders as name, index}
 						{#if name === 'tags'}
-							<div class={`p-2 min-w-[18vw] overflow-clip flex items-center justify-start  ${rowHovered===i && 'bg-surface-100'}`}>
+							<!--Custom Style for Tags column values-->
+							<div
+								class={`p-2 min-w-[18vw] overflow-clip flex items-center justify-start  ${rowHovered === i && 'bg-surface-100'}`}
+							>
 								<div class="p-2 rounded-full text-center text-xs text-primary-700 bg-[#DBEAFE]">
 									{row[name]}
 								</div>
 							</div>
-						{:else if index===0}
-						<button class={`p-2 pr-6 min-w-[14vw] sticky ${checkbox && serials?'left-[8vw]':((checkbox || serials)?'left-[4vw]':'left-0')} overflow-hidden  flex items-center justify-between  ${rowHovered===i ? 'bg-surface-100':'bg-[#FFFFFF]'}`}  on:mouseenter={()=>handleEditPopup(i)} on:mouseleave={()=>handleEditPopup(-1)}>
-							<div class={`${editPopup===i?'max-w-10 ':'max-w-20'} overflow-clip text-ellipsis`}>{row[name]}</div>
-							{#if editPopup===i}
-							<div class="p-1 text-xs rounded-full shadow-sm border border-[#E6E7EB] bg-[#FFFFFF]">
-								Edit {'>'}
+						{:else if name === 'status'}
+							<!--Custom Style for Status column values-->
+							<div
+								class={`p-2 min-w-[18vw] overflow-clip flex items-center justify-start  ${rowHovered === i && 'bg-surface-100'}`}
+							>
+								<div
+									class={`p-2 rounded-full text-center text-xs flex items-center gap-1 ${row[name] === 'Active' ? 'text-[#166534] bg-[#DCFCE7]' : `text-[#52525B]  ${rowHovered === i ? 'bg-[#FFFFFF]' : 'bg-[#F4F4F5]'}`} `}
+								>
+									<div
+										class={`w-2 h-2 rounded-full ${row[name] === 'Active' ? 'bg-[#166534]' : `bg-[#52525B]`} `}
+									/>
+									<div>{row[name]}</div>
+								</div>
 							</div>
-							{/if}
-						</button>
+						{:else if index === 0}
+							<button
+								class={`p-2 pr-6 min-w-[14vw] sticky ${checkbox && serials ? 'left-[8vw]' : checkbox || serials ? 'left-[4vw]' : 'left-0'} overflow-hidden  flex items-center justify-between  ${rowHovered === i ? 'bg-surface-100' : 'bg-[#FFFFFF]'}`}
+								on:mouseenter={() => handleEditPopup(i)}
+								on:mouseleave={() => handleEditPopup(-1)}
+							>
+								<div
+									class={`${editPopup === i ? 'max-w-16' : 'max-w-20'} overflow-clip text-ellipsis`}
+								>
+									{row[name]}
+								</div>
+								<!--show edit popup when hovered-->
+								{#if editPopup === i}
+									<div
+										class="p-1 text-xs rounded-full shadow-sm border border-[#E6E7EB] bg-[#FFFFFF]"
+									>
+										Edit {'>'}
+									</div>
+								{/if}
+							</button>
 						{:else}
-							<div class={`p-2 min-w-[18vw] text-start overflow-clip ${rowHovered===i && 'bg-surface-100'}`}>{row[name]}</div>
+							<div
+								class={`p-2 min-w-[18vw] text-start overflow-clip ${rowHovered === i && 'bg-surface-100'}`}
+							>
+								{row[name]}
+							</div>
 						{/if}
 					{/each}
 				</button>
@@ -244,4 +293,3 @@
 		<Pagination {handler} />
 	</div>
 </div>
-

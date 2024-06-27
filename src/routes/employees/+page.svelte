@@ -2,7 +2,7 @@
 	import Button from '$lib/components/ui/button/Button.svelte';
 	import Search from '$lib/components/ui/search/Search.svelte';
 	import Select from '$lib/components/ui/select/Select.svelte';
-	import { data, data2 } from '$lib/components/ui/table/data';
+	import { data, data2, employees } from '$lib/components/ui/table/data';
 	import Table from '$lib/components/ui/table/Table.svelte';
 	import { Icon } from 'svelte-icons-pack';
 	import { SlOptionsVertical } from 'svelte-icons-pack/sl';
@@ -25,7 +25,7 @@
 			</div>
 		</div>
 		<div class="">
-			<Table data={data2} checkbox={false} serials={true} />
+			<Table data={employees} checkbox={false} serials={true} />
 		</div>
 
 	</div>
