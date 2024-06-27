@@ -9,7 +9,7 @@
 </script>
 
 <div class="p-2 w-[calc(100vw-300px)] max-w-screen max-h-screen bg-[#FFFFFF] text-[#09090B]">
-	<div class="h-[14vh] my-2 font-semibold text-3xl">Training Programs</div>
+	<div class="h-[14vh] my-2 font-semibold text-3xl">Employees</div>
 	<div class=" flex flex-col gap-4">
 		<div class="flex flex-col gap-4 lg:gap-0 lg:flex-row lg:items-center lg:justify-between">
 			<div class="flex flex-col md:flex-row  gap-2">
@@ -18,14 +18,14 @@
 				<Select label="Tags" />
 			</div>
 			<div class="flex  gap-2">
-				<Button text="+ Create New Training" />
+				<Button text="+ Add Employee" />
 				<div class="p-2 flex items-center justify-center rounded-md border border-[#E6E7EB]">
 					<Icon src={SlOptionsVertical} />
 				</div>
 			</div>
 		</div>
 		<div class="">
-			<Table data={data} checkbox={true} serials={true} />
+			<Table data={data2} checkbox={false} serials={true} />
 		</div>
 
 	</div>
