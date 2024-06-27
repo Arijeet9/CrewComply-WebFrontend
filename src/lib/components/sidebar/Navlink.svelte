@@ -6,22 +6,23 @@
 	export let dropdownOpen: boolean = false;
 	export let onClick: () => void;
 	export let isSubLink: boolean = false;
+
+	import { page } from '$app/stores';
+	let currentPath;
+	$: currentPath=$page.url.pathname;
+	console.log($page.url.pathname);
 </script>
 
 <a
-	href={href}
+	{href}
 	on:click={onClick}
-	class={`p-2 flex items-center justify-between rounded-md hover:text-[#1D4ED8] hover:bg-[#F1F5F9] ${isSubLink ? 'ml-4' : ''}`}
+	class={`p-2 flex items-center justify-between rounded-md ${currentPath === href && 'text-[#1D4ED8] bg-[#F1F5F9]'}  hover:bg-surface-100 ${isSubLink ? 'ml-4' : ''}`}
 >
 	<div class="flex items-center gap-2">
 		<img src={icon} alt="" class="" />
 		<div>{label}</div>
 	</div>
 	{#if hasDropdown && !isSubLink}
-		<img
-			src={`/icons/${dropdownOpen ? 'uparrowbig' : 'downarrowbig'}.svg`}
-			alt=""
-			class=""
-		/>
+		<img src={`/icons/${dropdownOpen ? 'uparrowbig' : 'downarrowbig'}.svg`} alt="" class="" />
 	{/if}
 </a>

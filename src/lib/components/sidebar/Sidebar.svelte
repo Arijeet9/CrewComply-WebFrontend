@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Navlink from './Navlink.svelte';
+ 
 
 	const navLinks = [
 		{ href: '/dashboard', icon: '/icons/dashboard.svg', label: 'Dashboard' },
