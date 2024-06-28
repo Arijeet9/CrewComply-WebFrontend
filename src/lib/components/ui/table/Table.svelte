@@ -7,6 +7,7 @@
 	export let checkbox: boolean = false;
 	export let serials: boolean = false;
 
+
 	let editPopup = -1;
 	let rowHovered = -1;
 
@@ -56,7 +57,7 @@
 		<div class={`  rounded-t-lg flex  text-[#6B7280] bg-[#F1F5F9]`}>
 			{#if checkbox}
 				<div class="p-2 min-w-[4vw] sticky left-0 text-center bg-[#F1F5F9]">
-					<input type="checkbox" on:change={() => handleSelectAllRows()} />
+					<input type="checkbox" on:change={() => handleSelectAllRows()} class="rounded-md " />
 				</div>
 			{/if}
 
@@ -86,7 +87,7 @@
 						<div
 							class={`p-2 min-w-[4vw] sticky left-0 text-center ${rowHovered === i ? 'bg-surface-100' : 'bg-[#FFFFFF]'}`}
 						>
-							<input type="checkbox" bind:checked={rowsSelectStatus[i]} />
+							<input type="checkbox" bind:checked={rowsSelectStatus[i]} class="rounded-md " />
 						</div>
 					{/if}
 					{#if serials}
