@@ -25,20 +25,14 @@
 		</div>
 	</div> -->
 
-	<Table addDataButton="+ Add Employees" data={employees} checkbox={false} serials={true} />
-
+	<Table
+		addDataButton="+ Add Employees"
+		data={employees}
+		checkbox={false}
+		serials={true}
+		searchFilter={true}
+		departmentFilter={true}
+		tagsFilter={true}
+	/>
+	
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-

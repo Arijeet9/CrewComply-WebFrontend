@@ -29,6 +29,13 @@
 		</div>
 
 	</div> -->
-	<Table addDataButton="+ Create Training" data={data} checkbox={true} serials={true} />
-
+	<Table
+		addDataButton="+ Create Training"
+		{data}
+		checkbox={true}
+		serials={true}
+		searchFilter={true}
+		departmentFilter={true}
+		tagsFilter={true}
+	/>
 </div>
