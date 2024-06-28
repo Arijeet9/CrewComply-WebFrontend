@@ -1,4 +1,5 @@
 <script lang="ts">
+	
 	import { data, data2, employees } from '$lib/components/ui/table/data';
 	import Table from '$lib/components/ui/table/Table.svelte';
 

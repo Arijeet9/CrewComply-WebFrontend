@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Navlink from './Navlink.svelte';
+	import ProfileOptions from './ProfileOptions.svelte';
  
 
 	const navLinks = [
@@ -19,6 +20,7 @@
 	];
 
 	let organisationDropdown = false;
+	let profilePopup=false;
 
 	function toggleDropdown(label:string) {
 		if (label === 'Organisation') {
@@ -58,10 +60,18 @@
 			{/each}
 		</div>
 	</div>
-	<div class="p-2 border rounded-md border-[#E6E7EB]">
+
+	<div class="p-2 relative border rounded-md border-[#E6E7EB]">
+		{#if profilePopup}
+		<button on:click={()=>profilePopup=false} class="fixed inset-0 z-50 bg-[rgba(0,0,0,0.7)]" />
+		<div class="absolute bottom-full z-50">
+			<ProfileOptions />
+
+		</div>
+	{/if}
 		<img src="/logos/plogo.svg" alt="" class="rounded-md" />
 		<div class="flex items-center justify-between">
-			<button class="p-2 min-w-32 flex items-center justify-between rounded-md bg-[#F1F5F9]">
+			<button on:click={()=>profilePopup=!profilePopup} class="p-2 min-w-32 flex items-center justify-between rounded-md bg-[#F1F5F9]">
 				<div class="font-semibold">User</div>
 				<img src="/icons/uparrow.svg" alt="" class="" />
 			</button>
