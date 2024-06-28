@@ -1,8 +1,18 @@
 <script lang="ts">
+
+
+	import Search from './Search.svelte';
+	import Select from '../select/Select.svelte';
+	import Button from '../button/Button.svelte';
+	import { Icon } from 'svelte-icons-pack';
+	import { SlOptionsVertical } from 'svelte-icons-pack/sl';
+	//Import handler from SSD
+	import { DataHandler } from '@vincjo/datatables';
 	//Import local datatable components
 	// import ThSort from './ThSort.svelte';
 	import Pagination from './Pagination.svelte';
 
+	export let addDataButton:string;
 	export let data;
 	export let checkbox: boolean = false;
 	export let serials: boolean = false;
@@ -11,16 +21,18 @@
 	let editPopup = -1;
 	let rowHovered = -1;
 
-	//Import handler from SSD
-	import { DataHandler } from '@vincjo/datatables';
 
-	//Init data handler - CLIENT
+	//initialize datahandler
 	const handler = new DataHandler(data, { rowsPerPage: 5 });
+	
+	// set rows for table 
 	const rows = handler.getRows();
 	//console.log('Rows:', $rows);
 
 	let selectAllRows = false;
 	let rowsSelectStatus = new Array($rows.length).fill(false);
+
+	//to select all the rows in table
 	const handleSelectAllRows = () => {
 		selectAllRows = !selectAllRows;
 		if (selectAllRows) {
@@ -47,14 +59,41 @@
 		return capitalizedWords.join(' ');
 	}
 
+	//to show edit popup for particular row
 	const handleEditPopup = (index: number) => {
 		editPopup = index;
 	};
+
 </script>
+
+<section class=" flex flex-col gap-4">
+
+
+
+<!-- Table Filters -->
+<div class="flex flex-col gap-4 lg:gap-0 lg:flex-row lg:items-center lg:justify-between">
+	<div class="flex flex-col md:flex-row  gap-2">
+
+		<!--to show data according to the search input-->
+		<Search {handler} />
+		
+		<Select label="Select Department" />
+		<Select label="Tags" />
+	</div>
+	<div class="flex  gap-2">
+		<Button text={`${addDataButton}`} />
+		<div class="p-2 flex items-center justify-center rounded-md border border-[#E6E7EB]">
+			<Icon src={SlOptionsVertical} />
+		</div>
+	</div>
+</div>
 
 <div class="relative max-h-[70vh] h-[70vh] text-nowrap">
 	<div class="flex flex-col font-medium rounded-lg border border-[#E6E7EB] overflow-x-scroll">
+
+		<!--Table Header-->
 		<div class={`  rounded-t-lg flex  text-[#6B7280] bg-[#F1F5F9]`}>
+
 			{#if checkbox}
 				<div class="p-2 min-w-[4vw] sticky left-0 text-center bg-[#F1F5F9]">
 					<input type="checkbox" on:change={() => handleSelectAllRows()} class="rounded-md " />
@@ -68,6 +107,7 @@
 					No.
 				</div>
 			{/if}
+
 			{#each tableColumnHeaders as column, i}
 				<div
 					class={`p-2  ${i === 0 ? `min-w-[14vw] sticky ${checkbox && serials ? 'left-[8vw]' : checkbox || serials ? 'left-[4vw]' : 'left-0'} ` : 'min-w-[18vw]'} bg-[#F1F5F9]`}
@@ -75,8 +115,12 @@
 					{capitalizedWords(column)}
 				</div>
 			{/each}
+
 		</div>
+
+		<!--Table Body-->
 		<div class="flex flex-col rounded-b-lg">
+
 			{#each $rows as row, i}
 				<button
 					on:mouseenter={() => (rowHovered = i)}
@@ -123,7 +167,7 @@
 							</div>
 						{:else if index === 0}
 							<button
-								class={`p-2 pr-6 min-w-[14vw] sticky ${checkbox && serials ? 'left-[8vw]' : checkbox || serials ? 'left-[4vw]' : 'left-0'} overflow-hidden  flex items-center justify-between  ${rowHovered === i ? 'bg-surface-100' : 'bg-[#FFFFFF]'}`}
+								class={`p-2 pr-6 min-w-[14vw] sticky ${checkbox && serials ? 'left-[8vw]' : checkbox || serials ? 'left-[4vw]' : 'left-0'} overflow-hidden  flex items-center justify-between   ${rowHovered === i ? 'bg-surface-100' : 'bg-[#FFFFFF]'}`}
 								on:mouseenter={() => handleEditPopup(i)}
 								on:mouseleave={() => handleEditPopup(-1)}
 							>
@@ -153,7 +197,13 @@
 			{/each}
 		</div>
 	</div>
+
+	<!-- Table Footer -->
 	<div class="absolute bottom-0 md:bottom-16 lg:bottom-0 left-2/4 translate-x-[-50%]">
 		<Pagination {handler} />
 	</div>
+
 </div>
+
+
+</section>

@@ -10,7 +10,7 @@
 
 <div class="p-2 w-[calc(100vw-300px)] max-w-screen max-h-screen bg-[#FFFFFF] text-[#09090B]">
 	<div class="h-[14vh] my-2 font-semibold text-3xl">Training Programs</div>
-	<div class=" flex flex-col gap-4">
+	<!-- <div class=" flex flex-col gap-4">
 		<div class="flex flex-col gap-4 lg:gap-0 lg:flex-row lg:items-center lg:justify-between">
 			<div class="flex flex-col md:flex-row  gap-2">
 				<Search />
@@ -25,8 +25,10 @@
 			</div>
 		</div>
 		<div class="">
-			<Table data={data} checkbox={true} serials={true} />
+			<Table addDataButton="+ Create Training" data={data} checkbox={true} serials={true} />
 		</div>
 
-	</div>
+	</div> -->
+	<Table addDataButton="+ Create Training" data={data} checkbox={true} serials={true} />
+
 </div>
