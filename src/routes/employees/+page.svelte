@@ -1,10 +1,15 @@
 <script lang="ts">
 	import { data, data2, employees } from '$lib/components/ui/table/data';
 	import Table from '$lib/components/ui/table/Table.svelte';
+
+	//for table props to add select filters
+	const selectFilter=['department','tags']
+
 </script>
 
 <div class="p-2 w-[calc(100vw-300px)] max-w-screen max-h-screen bg-[#FFFFFF] text-[#09090B]">
 	<div class="h-[14vh] my-2 font-semibold text-3xl">Employees</div>
+
 	<!-- <div class=" flex flex-col gap-4">
 		<div class="flex flex-col gap-4 lg:gap-0 lg:flex-row lg:items-center lg:justify-between">
 			<div class="flex flex-col md:flex-row  gap-2">
@@ -31,8 +36,7 @@
 		checkbox={false}
 		serials={true}
 		searchFilter={true}
-		departmentFilter={true}
-		tagsFilter={true}
+		selectFilter={selectFilter}
 	/>
-	
+
 </div>

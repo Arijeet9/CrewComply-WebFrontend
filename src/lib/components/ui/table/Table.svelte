@@ -15,11 +15,11 @@
 	export let checkbox: boolean = false;
 	export let serials: boolean = false;
 	export let searchFilter: boolean = false;
-	export let departmentFilter: boolean = false;
-	export let tagsFilter: boolean = false;
+	export let selectFilter: string[] = [];
 
-	let tagsOptions:any[];
-	let departmentsOptions:any[];
+
+	let selectFilterData:any;
+
 	let editPopup = -1;
 	let rowHovered = -1;
 
@@ -65,31 +65,40 @@
 		editPopup = index;
 	};
 
-	if (departmentFilter) {
-		departmentsOptions= [...new Set(data.map((data:any) => data.department))];
+
+
+	if (selectFilter.length > 0) {
+		selectFilterData = selectFilter.map((item, i) => ({
+			[item]: [...new Set(data.map((data:any) => data[item]))]
+		}));
 	}
-	if (tagsFilter) {
-		tagsOptions= [...new Set(data.map((data:any) => data.tags))];
-	}
+
+	console.log('Select Filter Data:', selectFilterData);
+
+
+
 </script>
 
 <section class=" flex flex-col gap-4">
-
 	<!-- Table Filters -->
 	<div class="flex flex-col gap-4 lg:gap-0 lg:flex-row lg:items-center lg:justify-between">
 		<div class="flex flex-col md:flex-row gap-2">
-
+			
 			<!--to show data according to the search input-->
 			{#if searchFilter}
 				<Search {handler} />
 			{/if}
 
-			{#if departmentFilter}
-				<Select {handler} filterBy="department" label="Select Department" options={departmentsOptions} />
-			{/if}
-
-			{#if tagsFilter}
-				<Select {handler} filterBy="tags" label="Tags" options={tagsOptions} />
+			<!--to filter the data according to the select option-->
+			{#if selectFilter}
+				{#each selectFilterData as item}
+					<Select
+						{handler}
+						filterBy={Object.keys(item)[0]}
+						label={Object.keys(item)[0]}
+						options={Object.values(item)[0]}
+					/>
+				{/each}
 			{/if}
 
 		</div>
@@ -105,7 +114,6 @@
 
 	<div class="relative max-h-[70vh] h-[70vh] text-nowrap">
 		<div class="flex flex-col font-medium rounded-lg border border-[#E6E7EB] overflow-x-scroll">
-
 			<!--Table Header-->
 			<div class={`  rounded-t-lg flex  text-[#6B7280] bg-[#F1F5F9]`}>
 				{#if checkbox}
@@ -154,7 +162,6 @@
 							</div>
 						{/if}
 						{#each tableColumnHeaders as name, index}
-
 							{#if name === 'tags'}
 								<!--Custom Style for Tags column values-->
 								<div
@@ -164,7 +171,6 @@
 										{row[name]}
 									</div>
 								</div>
-
 							{:else if name === 'status'}
 								<!--Custom Style for Status column values-->
 								<div
@@ -179,7 +185,6 @@
 										<div>{row[name]}</div>
 									</div>
 								</div>
-
 							{:else if index === 0}
 								<button
 									class={`p-2 pr-6 min-w-[14vw] sticky ${checkbox && serials ? 'left-[8vw]' : checkbox || serials ? 'left-[4vw]' : 'left-0'} overflow-hidden  flex items-center justify-between   ${rowHovered === i ? 'bg-surface-100' : 'bg-[#FFFFFF]'}`}
@@ -200,7 +205,6 @@
 											Edit {'>'}
 										</div>
 									{/if}
-
 								</button>
 							{:else}
 								<div
@@ -219,7 +223,5 @@
 		<div class="absolute bottom-0 md:bottom-16 lg:bottom-0 left-2/4 translate-x-[-50%]">
 			<Pagination {handler} />
 		</div>
-
 	</div>
-	
 </section>

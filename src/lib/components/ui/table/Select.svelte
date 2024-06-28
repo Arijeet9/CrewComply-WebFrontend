@@ -5,7 +5,7 @@
 	let value: string;
 
 	export let label: string = 'Select';
-	export let options: string[];
+	export let options: any;
 </script>
 
 <div class="rounded-md border border-[#E5E7EB] text-[#6B7280]">
@@ -16,13 +16,9 @@
 		}}
 		class="select variant-filled text-[#6B7280]"
 	>
-		<option value="">{label}</option>
+		<option value="">Select {label.charAt(0).toUpperCase() + label.slice(1)}</option>
 		{#each options as option}
 			<option value={option}>{option}</option>
 		{/each}
-		<!-- <option value="2">Option 2</option>
-        <option value="3">Option 3</option>
-        <option value="4">Option 4</option>
-        <option value="5">Option 5</option> -->
 	</select>
 </div>
