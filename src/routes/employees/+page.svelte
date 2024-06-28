@@ -32,6 +32,7 @@
 	</div> -->
 
 	<Table
+		route="employees"
 		addDataButton="+ Add Employees"
 		data={employees}
 		checkbox={false}

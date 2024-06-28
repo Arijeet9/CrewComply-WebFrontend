@@ -32,6 +32,7 @@
 	</div> -->
 	
 	<Table
+		route="trainings"
 		addDataButton="+ Create Training"
 		{data}
 		checkbox={true}

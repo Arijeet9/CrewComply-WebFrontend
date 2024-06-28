@@ -1,15 +1,20 @@
 <script lang="ts">
+
 	import Search from './Search.svelte';
 	import Select from './Select.svelte';
 	import Button from '../button/Button.svelte';
 	import { Icon } from 'svelte-icons-pack';
 	import { SlOptionsVertical } from 'svelte-icons-pack/sl';
+
 	//Import handler from SSD
 	import { DataHandler } from '@vincjo/datatables';
-	//Import local datatable components
-	// import ThSort from './ThSort.svelte';
-	import Pagination from './Pagination.svelte';
 
+	//Import local datatable components
+	//import ThSort from './ThSort.svelte';
+	import Pagination from './Pagination.svelte';
+	import { goto } from '$app/navigation';
+
+	export let route:string="";
 	export let addDataButton: string = '';
 	export let data;
 	export let checkbox: boolean = false;
@@ -73,7 +78,7 @@
 		}));
 	}
 
-	console.log('Select Filter Data:', selectFilterData);
+	//console.log('Select Filter Data:', selectFilterData);
 
 
 
@@ -199,11 +204,12 @@
 
 									<!--show edit popup when hovered-->
 									{#if editPopup === i}
-										<div
+										<button
+											on:click={()=>goto(`/${route}/${row[name]}`)}
 											class="p-1 text-xs rounded-full shadow-sm border border-[#E6E7EB] bg-[#FFFFFF]"
 										>
 											Edit {'>'}
-										</div>
+										</button>
 									{/if}
 								</button>
 							{:else}
