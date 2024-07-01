@@ -1,11 +1,13 @@
 <script lang="ts">
+	import { createEventDispatcher } from 'svelte';
+
 	import { getModalStore, type ModalComponent, type ModalSettings } from '@skeletonlabs/skeleton';
 	import AddDataFormModal from '../modals/forms/AddDataFormModal.svelte';
 
 	export let text: string;
 	export let iconSrc: string | undefined = undefined;
 	export let buttonClass: string = 'btn btn-filled-primary';
-	export let data:string[]|null=null;
+	export let data: string[] | null = null;
 
 	const modalStore = getModalStore();
 
@@ -22,10 +24,10 @@
 
 	if (data) {
 		//console.log(data)
-		formData = data?.map((item:any) => ({[item]:""}));
+		formData = data?.map((item: any) => ({ [item]: '' }));
 	}
 
-  //opens a modal component form to add data
+	//opens a modal component form to add data
 	function modalComponentForm(): void {
 		const c: ModalComponent = { ref: AddDataFormModal };
 		const modal: ModalSettings = {
@@ -38,10 +40,23 @@
 		};
 		modalStore.trigger(modal);
 	}
+
+	const dispatch = createEventDispatcher();
+
+	const handleAddDataClick = () => {
+		dispatch('add-data-click');
+	};
 </script>
 
 <section>
-	<button on:click={() => modalComponentForm()} type="button" class={buttonClass}>
+	<button
+		on:click={() => {
+			modalComponentForm()
+			handleAddDataClick()
+		}}
+		type="button"
+		class={buttonClass}
+	>
 		{#if iconSrc}
 			<span>
 				<img src={iconSrc} alt="" class="w-5 h-5 object-contain" />

@@ -1,6 +1,6 @@
-import Table from './Table.svelte';
+import Table from '$lib/components/ui/table/Table.svelte';
 import { action } from '@storybook/addon-actions';
-import {data,data2,employees} from "./data"
+import {data,data2,employees} from "$lib/components/ui/table/data"
 
 
 export default {

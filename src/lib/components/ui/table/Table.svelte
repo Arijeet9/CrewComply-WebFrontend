@@ -211,7 +211,7 @@
 								<button
 									on:mouseenter={() => handleEditPopup(i)}
 									on:mouseleave={() => handleEditPopup(-1)}
-									class={`p-2 pr-6 min-w-[14vw] sticky ${checkbox && serials ? 'left-[8vw]' : checkbox || serials ? 'left-[4vw]' : 'left-0'} overflow-hidden  flex items-center justify-between   ${rowHovered === i ? 'bg-surface-100' : 'bg-[#FFFFFF]'}`}
+									class={`p-2 pr-6 min-w-[14vw] sticky ${checkbox && serials ? 'left-[8vw]' : checkbox || serials ? 'left-[4vw]' : 'left-0'} overflow-hidden  flex items-center justify-between   ${rowHovered === i ? 'bg-surface-100 ' : 'bg-[#FFFFFF]'}`}
 								>
 									<div
 										class={`${editPopup === i ? 'max-w-16' : 'max-w-20'} overflow-clip text-ellipsis`}
