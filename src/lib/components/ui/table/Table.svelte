@@ -1,8 +1,9 @@
 <script lang="ts">
-
-	import Search from './Search.svelte';
-	import Select from './Select.svelte';
-	import Button from '../button/Button.svelte';
+	import StatusBadge from '$lib/components/ui/badges/StatusBadge.svelte';
+	import TagsBadge from '$lib/components/ui/badges/TagsBadge.svelte';
+	import Search from '$lib/components/ui/table/Search.svelte';
+	import Select from '$lib/components/ui/table/Select.svelte';
+	import Button from '$lib/components/ui/button/Button.svelte';
 	import { Icon } from 'svelte-icons-pack';
 	import { SlOptionsVertical } from 'svelte-icons-pack/sl';
 
@@ -14,7 +15,7 @@
 	import Pagination from './Pagination.svelte';
 	import { goto } from '$app/navigation';
 
-	export let route:string="";
+	export let route: string = '';
 	export let addDataButton: string = '';
 	export let data;
 	export let checkbox: boolean = false;
@@ -22,8 +23,7 @@
 	export let searchFilter: boolean = false;
 	export let selectFilter: string[] = [];
 
-
-	let selectFilterData:any;
+	let selectFilterData: any;
 
 	let editPopup = -1;
 	let rowHovered = -1;
@@ -70,25 +70,19 @@
 		editPopup = index;
 	};
 
-
-
 	if (selectFilter.length > 0) {
 		selectFilterData = selectFilter.map((item, i) => ({
-			[item]: [...new Set(data.map((data:any) => data[item]))]
+			[item]: [...new Set(data.map((data: any) => data[item]))]
 		}));
 	}
 
 	//console.log('Select Filter Data:', selectFilterData);
-
-
-
 </script>
 
 <section class=" flex flex-col gap-4">
 	<!-- Table Filters -->
 	<div class="flex flex-col gap-4 lg:gap-0 lg:flex-row lg:items-center lg:justify-between">
 		<div class="flex flex-col md:flex-row gap-2">
-			
 			<!--to show data according to the search input-->
 			{#if searchFilter}
 				<Search {handler} />
@@ -105,7 +99,6 @@
 					/>
 				{/each}
 			{/if}
-
 		</div>
 		<div class="flex gap-2">
 			{#if addDataButton}
@@ -170,25 +163,36 @@
 							{#if name === 'tags'}
 								<!--Custom Style for Tags column values-->
 								<div
-									class={`p-2 min-w-[18vw] overflow-clip flex items-center justify-start  ${rowHovered === i && 'bg-surface-100'}`}
+									class={`p-2 min-w-[18vw] overflow-clip flex items-center gap-2 justify-start  ${rowHovered === i && 'bg-surface-100'}`}
 								>
-									<div class="p-2 rounded-full text-center text-xs text-primary-700 bg-[#DBEAFE]">
-										{row[name]}
-									</div>
+									<TagsBadge data={row[name]} />
+
+									<!-- {#if typeof row[name] === 'string'}
+										<TagsBadge label={row[name]} />
+									{:else if Array.isArray(row[name]) && row[name].length > 0}
+										{#if row[name].length > 2}
+											<div class="flex items-center gap-2">
+												{#each row[name] as tag, i}
+													{#if i < 1}
+														<TagsBadge label={tag} />
+													{/if}
+												{/each}
+												<div class="text-[#6B7280]">& {row[name].length - 1} more</div>
+											</div>
+										{:else}
+											{#each row[name] as tag}
+												<TagsBadge label={tag} />
+											{/each}
+										{/if}
+									{/if} -->
+								
 								</div>
 							{:else if name === 'status'}
 								<!--Custom Style for Status column values-->
 								<div
 									class={`p-2 min-w-[18vw] overflow-clip flex items-center justify-start  ${rowHovered === i && 'bg-surface-100'}`}
 								>
-									<div
-										class={`p-2 rounded-full text-center text-xs flex items-center gap-1 ${row[name] === 'Active' ? 'text-[#166534] bg-[#DCFCE7]' : `text-[#52525B]  ${rowHovered === i ? 'bg-[#FFFFFF]' : 'bg-[#F4F4F5]'}`} `}
-									>
-										<div
-											class={`w-2 h-2 rounded-full ${row[name] === 'Active' ? 'bg-[#166534]' : `bg-[#52525B]`} `}
-										/>
-										<div>{row[name]}</div>
-									</div>
+									<StatusBadge index={i} {rowHovered} label={row[name]} />
 								</div>
 							{:else if index === 0}
 								<button
@@ -205,7 +209,7 @@
 									<!--show edit popup when hovered-->
 									{#if editPopup === i}
 										<button
-											on:click={()=>goto(`/${route}/${row[name]}`)}
+											on:click={() => route !== '' && goto(`/${route}/${row[name]}`)}
 											class="p-1 text-xs rounded-full shadow-sm border border-[#E6E7EB] bg-[#FFFFFF]"
 										>
 											Edit {'>'}
