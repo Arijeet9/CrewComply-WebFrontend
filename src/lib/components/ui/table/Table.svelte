@@ -1,4 +1,7 @@
 <script lang="ts">
+
+	import { createEventDispatcher } from 'svelte';
+
 	import StatusBadge from '$lib/components/ui/badges/StatusBadge.svelte';
 	import TagsBadge from '$lib/components/ui/badges/TagsBadge.svelte';
 	import Search from '$lib/components/ui/table/Search.svelte';
@@ -77,6 +80,16 @@
 	}
 
 	//console.log('Select Filter Data:', selectFilterData);
+
+
+	const dispatch = createEventDispatcher();
+
+	const handleSelectRow = (rowIndex: number) => {
+		dispatch('select-row', { rowIndex, rowData: rows[rowIndex] });
+	};
+
+
+
 </script>
 
 <section class=" flex flex-col gap-4">
@@ -110,7 +123,7 @@
 		</div>
 	</div>
 
-	<div class="relative max-h-[70vh] h-[70vh] text-nowrap">
+	<div class="relative max-h-[70vh] h-[70vh] text-nowrap flex flex-col justify-between">
 		<div class="flex flex-col font-medium rounded-lg border border-[#E6E7EB] overflow-x-scroll">
 			<!--Table Header-->
 			<div class={`  rounded-t-lg flex  text-[#6B7280] bg-[#F1F5F9]`}>
@@ -143,6 +156,7 @@
 					<button
 						on:mouseenter={() => (rowHovered = i)}
 						on:mouseleave={() => (rowHovered = -1)}
+						on:click={() => handleSelectRow(i)}
 						class={`flex hover:bg-surface-100`}
 					>
 						{#if checkbox}
@@ -229,7 +243,7 @@
 		</div>
 
 		<!-- Table Footer -->
-		<div class="absolute bottom-0 md:bottom-16 lg:bottom-0 left-2/4 translate-x-[-50%]">
+		<div class="flex justify-center">
 			<Pagination {handler} />
 		</div>
 	</div>

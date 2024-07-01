@@ -5,7 +5,7 @@
 	export let text: string;
 	export let iconSrc: string | undefined = undefined;
 	export let buttonClass: string = 'btn btn-filled-primary';
-	export let data:[]|null=null;
+	export let data:string[]|null=null;
 
 	const modalStore = getModalStore();
 

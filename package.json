@@ -58,6 +58,7 @@
   "type": "module",
   "dependencies": {
     "@floating-ui/dom": "1.6.6",
+    "@storybook/addon-actions": "^8.1.11",
     "@storybook/addon-knobs": "^8.0.1",
     "@vincjo/datatables": "^1.14.10",
     "highlight.js": "11.9.0",

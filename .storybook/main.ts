@@ -7,7 +7,8 @@ const config: StorybookConfig = {
 		'@storybook/addon-essentials',
 		'@storybook/addon-knobs',
 		'@chromatic-com/storybook',
-		'@storybook/addon-interactions'
+		'@storybook/addon-interactions',
+		'@storybook/addon-actions',
 	],
 	framework: {
 		name: '@storybook/sveltekit',

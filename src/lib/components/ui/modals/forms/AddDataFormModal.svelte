@@ -60,7 +60,7 @@
 								class="input variant-filled"
 								type="text"
 								bind:value={formData[i][key]}
-								placeholder={value}
+								placeholder="Enter.."
 							/>
 						</div>
 					</label>
