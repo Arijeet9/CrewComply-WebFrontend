@@ -102,7 +102,7 @@
 		</div>
 		<div class="flex gap-2">
 			{#if addDataButton}
-				<Button text={`${addDataButton}`} />
+				<Button text={`${addDataButton}`} data={tableColumnHeaders} />
 			{/if}
 			<div class="p-2 flex items-center justify-center rounded-md border border-[#E6E7EB]">
 				<Icon src={SlOptionsVertical} />
@@ -185,7 +185,6 @@
 											{/each}
 										{/if}
 									{/if} -->
-								
 								</div>
 							{:else if name === 'status'}
 								<!--Custom Style for Status column values-->
@@ -196,9 +195,9 @@
 								</div>
 							{:else if index === 0}
 								<button
-									class={`p-2 pr-6 min-w-[14vw] sticky ${checkbox && serials ? 'left-[8vw]' : checkbox || serials ? 'left-[4vw]' : 'left-0'} overflow-hidden  flex items-center justify-between   ${rowHovered === i ? 'bg-surface-100' : 'bg-[#FFFFFF]'}`}
 									on:mouseenter={() => handleEditPopup(i)}
 									on:mouseleave={() => handleEditPopup(-1)}
+									class={`p-2 pr-6 min-w-[14vw] sticky ${checkbox && serials ? 'left-[8vw]' : checkbox || serials ? 'left-[4vw]' : 'left-0'} overflow-hidden  flex items-center justify-between   ${rowHovered === i ? 'bg-surface-100' : 'bg-[#FFFFFF]'}`}
 								>
 									<div
 										class={`${editPopup === i ? 'max-w-16' : 'max-w-20'} overflow-clip text-ellipsis`}
@@ -217,11 +216,11 @@
 									{/if}
 								</button>
 							{:else}
-								<div
+								<button
 									class={`p-2 min-w-[18vw] text-start overflow-clip ${rowHovered === i && 'bg-surface-100'}`}
 								>
 									{row[name]}
-								</div>
+								</button>
 							{/if}
 						{/each}
 					</button>
