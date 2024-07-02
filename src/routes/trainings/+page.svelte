@@ -32,6 +32,7 @@
 	</div> -->
 	
 	<Table
+		title="Training Programs"
 		route="trainings"
 		addDataButton="+ Create Training"
 		{data}

@@ -1,5 +1,4 @@
 <script lang="ts">
-
 	import { createEventDispatcher } from 'svelte';
 
 	import StatusBadge from '$lib/components/ui/badges/StatusBadge.svelte';
@@ -17,10 +16,13 @@
 	//import ThSort from './ThSort.svelte';
 	import Pagination from './Pagination.svelte';
 	import { goto } from '$app/navigation';
+	import EditDataFormModal from '../modals/forms/EditDataFormModal.svelte';
+	import { getModalStore, type ModalComponent, type ModalSettings } from '@skeletonlabs/skeleton';
 
+	export let title:string='Table';
 	export let route: string = '';
 	export let addDataButton: string = '';
-	export let data;
+	export let data:any;
 	export let checkbox: boolean = false;
 	export let serials: boolean = false;
 	export let searchFilter: boolean = false;
@@ -81,15 +83,62 @@
 
 	//console.log('Select Filter Data:', selectFilterData);
 
+	const modalStore = getModalStore();
+
+	function objectToArray(dataObj:any) {
+    return Object.values(dataObj);
+}
+
+	// function findRowDataByIndex(index:number) {
+    // //check if the index is within valid range
+    // if (index < 0 || index >= data.length) {
+    //     return null;
+    // }
+
+    // return data[index];
+	// }
+
+	function findRowDataByIndex(index: number): object[] | null {
+    // Check if the index is within valid range
+    if (index < 0 || index >= data.length) {
+        return null;
+    }
+
+    const rowData = data[index];
+    const rowDataArray: object[] = [];
+
+    // Convert each key-value pair into an object and push to rowDataArray
+    for (const key in rowData) {
+        if (Object.prototype.hasOwnProperty.call(rowData, key)) {
+            const obj = { [key]: rowData[key] };
+            rowDataArray.push(obj);
+        }
+    }
+
+    return rowDataArray;
+}
+
+	function modalEditComponentForm(index:number): void {
+
+		const formData=findRowDataByIndex(index)
+
+		const c: ModalComponent = { ref: EditDataFormModal };
+		const modal: ModalSettings = {
+			type: 'component',
+			component: c,
+			title: title,
+			body: '',
+			value:formData,
+			response: (r) => console.log('response:', r)
+		};
+		modalStore.trigger(modal);
+	}
 
 	const dispatch = createEventDispatcher();
 
 	const handleSelectRow = (rowIndex: number) => {
 		dispatch('select-row', { rowIndex, rowData: rows[rowIndex] });
 	};
-
-
-
 </script>
 
 <section class=" flex flex-col gap-4">
@@ -222,7 +271,7 @@
 									<!--show edit popup when hovered-->
 									{#if editPopup === i}
 										<button
-											on:click={() => route !== '' && goto(`/${route}/${row[name]}`)}
+											on:click={() => modalEditComponentForm(i)}
 											class="p-1 text-xs rounded-full shadow-sm border border-[#E6E7EB] bg-[#FFFFFF]"
 										>
 											Edit {'>'}
