@@ -55,7 +55,7 @@
 			handleAddDataClick()
 		}}
 		type="button"
-		class={buttonClass}
+		class={`${buttonClass} rounded-md`}
 	>
 		{#if iconSrc}
 			<span>

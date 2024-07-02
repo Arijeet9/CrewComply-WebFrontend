@@ -17,6 +17,9 @@ importers:
       '@storybook/addon-knobs':
         specifier: ^8.0.1
         version: 8.0.1(@storybook/components@8.1.10(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@storybook/core-events@8.1.11)(@storybook/manager-api@8.1.10(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@storybook/theming@8.1.10(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@storybook/testing-library':
+        specifier: ^0.2.2
+        version: 0.2.2
       '@vincjo/datatables':
         specifier: ^1.14.10
         version: 1.14.10(svelte@4.2.18)
@@ -1691,6 +1694,10 @@ packages:
 
   '@storybook/test@8.1.10':
     resolution: {integrity: sha512-uskw/xb/GkGLRTEKPao/5xUKxjP1X3DnDpE52xDF46ZmTvM+gPQbkex97qdG6Mfv37/0lhVhufAsV3g5+CrYKQ==}
+
+  '@storybook/testing-library@0.2.2':
+    resolution: {integrity: sha512-L8sXFJUHmrlyU2BsWWZGuAjv39Jl1uAqUHdxmN42JY15M4+XCMjGlArdCCjDe1wpTSW6USYISA9axjZojgtvnw==}
+    deprecated: In Storybook 8, this package functionality has been integrated to a new package called @storybook/test, which uses Vitest APIs for an improved experience. When upgrading to Storybook 8 with 'npx storybook@latest upgrade', you will get prompted and will get an automigration for the new package. Please migrate when you can.
 
   '@storybook/theming@8.1.10':
     resolution: {integrity: sha512-W7mth4hwdTqWLneqYCyUnIEiDg4vSokoad8HEodPz6JC9XUPUX3Yi2W4W3xFvqrW4Z5RXfuJ53iG2HN+0AgaQw==}
@@ -7028,6 +7035,12 @@ snapshots:
       - '@types/jest'
       - jest
       - vitest
+
+  '@storybook/testing-library@0.2.2':
+    dependencies:
+      '@testing-library/dom': 9.3.4
+      '@testing-library/user-event': 14.5.2(@testing-library/dom@9.3.4)
+      ts-dedent: 2.2.0
 
   '@storybook/theming@8.1.10(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:

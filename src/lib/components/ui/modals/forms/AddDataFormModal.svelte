@@ -49,7 +49,6 @@
 			{$modalStore[0].title?.replace(/^[^\w\s]+|\s+$/g, '') ?? '(title missing)'}
 		</header>
 		<article>{$modalStore[0].body ?? '(body missing)'}</article>
-		<!-- Enable for debugging: -->
 		<form class="modal-form {cForm} grid grid-cols-2 items-center gap-2">
 			{#each formData as input, i}
 				{#each Object.entries(input) as [key, value]}
@@ -85,10 +84,9 @@
 				</div>
 			</label> -->
 		</form>
-		<!-- prettier-ignore -->
 		<footer class="modal-footer {parent.regionFooter} flex items-center justify-center">
-			<button class="btn variant-outline text-black font-medium" on:click={parent.onClose}>{parent.buttonTextCancel}</button>
-			<button class="btn btn-filled-primary" on:click={onFormSubmit}>{$modalStore[0].title?.replace(/^[^\w\s]+|\s+$/g, '') }</button>
+			<button class="btn variant-outline rounded-md font-medium text-surface-700 " on:click={parent.onClose}>{parent.buttonTextCancel}</button>
+			<button type="button" class="btn rounded-md font-medium bg-primary-500 text-white" on:click={onFormSubmit}>{$modalStore[0].title?.replace(/^[^\w\s]+|\s+$/g, '') }</button>
 		</footer>
 	</div>
 {/if}

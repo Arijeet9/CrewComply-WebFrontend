@@ -14,10 +14,11 @@ export default {
 	}
 };
 
-const modalStore = getModalStore();
 
-const Template = ({ title, body, value, response }) => {
-	initializeStores();
+const Template = ({ ...args}) => {
+	initializeStores()
+	const modalStore = getModalStore();
+
 
 	// const c: ModalComponent = { ref: AddDataFormModal };
 	// const modal: ModalSettings = {
@@ -37,7 +38,7 @@ const Template = ({ title, body, value, response }) => {
 		title,
 		body,
 		value,
-		response,
+		response
 	});
 
 	return {
@@ -47,10 +48,11 @@ const Template = ({ title, body, value, response }) => {
 };
 
 export const Default = Template.bind({});
+const formData=[{"employee name": ''}, {email: ''}, {"job title": ''}, {tags: ''}, {status: ''}, {department: ''},{location: ''},{action: ''}]
 Default.args = {
 	title: 'Add Data Form',
 	body: 'Please fill out the form below:',
-	value: [{ name: '' }, { email: '' }, { phone: '' }],
+	value:[{"employee name": ''}, {email: ''}, {"job title": ''}, {tags: ''}, {status: ''}, {department: ''},{location: ''},{action: ''}],
 	response: (r: any) => console.log('Form submitted:', r)
 };
 
